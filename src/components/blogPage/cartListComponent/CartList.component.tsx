@@ -25,6 +25,7 @@ const CardListComponent: NextPage<CardListPropsType> = ({ posts, loading }) => {
               imgSrc={imgUrl}
               buttonTitle="more"
               url={`/blog/${id}`}
+              urlType="B"
             />
           ))
         : ""}

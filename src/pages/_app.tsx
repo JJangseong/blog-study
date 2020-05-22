@@ -1,4 +1,3 @@
-import { AppProps } from "next/app";
 import { ApolloProvider } from "@apollo/react-hooks";
 
 import "react-markdown-editor-lite/lib/index.css";

@@ -74,6 +74,7 @@ const PortfolioPageComponent: NextPage = () => {
                   imgSrc={headingImg}
                   buttonTitle="Go Page"
                   url={url}
+                  urlType="P"
                 />
               );
             })

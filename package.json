@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_ENV=development next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production next start",
     "buildAndStart": "next build && next start",
     "export": "next export",
-    "deploy": "npm run build && npm run export"
+    "deploy": "NODE_ENV=production npm run build && npm run export"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
@@ -20,6 +20,7 @@
     "axios": "^0.19.2",
     "date-fns": "^2.11.1",
     "disqus-react": "^1.0.8",
+    "dotenv": "^8.2.0",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
     "gray-matter": "^4.0.2",

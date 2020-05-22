@@ -3,6 +3,7 @@ import moment from "moment";
 
 export async function uploadImage(file: File, fileName: string) {
   let dataUrl: string = "";
+  console.log(process.env.I_DENTITY_POLL_ID);
   //아마존 S3에 저장하려면 먼저 설정을 업데이트합니다.
   AWS.config.update({
     region: "ap-northeast-2",

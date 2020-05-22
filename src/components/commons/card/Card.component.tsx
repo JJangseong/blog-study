@@ -16,6 +16,7 @@ type CardProps = {
   content: string;
   buttonTitle: string;
   url?: any;
+  urlType?: string;
   date: string;
   imgSrc?: string;
 };
@@ -27,8 +28,32 @@ const Card: NextPage<CardProps> = ({
   content,
   buttonTitle,
   url,
+  urlType,
 }) => {
-  console.log(url)
+  const portfolioButton = () => {
+    return url ? (
+      <CardButton inverted={true} onClick={() => (location.href = url)}>
+        {buttonTitle}
+      </CardButton>
+    ) : (
+      <Link href={"#"}>
+        <CardButton inverted={true}>{buttonTitle}</CardButton>
+      </Link>
+    );
+  };
+
+  const boardButton = () => {
+    return url ? (
+      <Link href={url}>
+        <CardButton inverted={true}>{buttonTitle}</CardButton>
+      </Link>
+    ) : (
+      <Link href={"#"}>
+        <CardButton inverted={true}>{buttonTitle}</CardButton>
+      </Link>
+    );
+  };
+
   return (
     <CardContainer>
       <CardHeading imgSrc={imgSrc} />
@@ -36,13 +61,9 @@ const Card: NextPage<CardProps> = ({
         <CardTitle>{title}</CardTitle>
         <CardDate>{date}</CardDate>
         <CardContent>{content}</CardContent>
-        {url ? (
-          <CardButton inverted={true} onClick={() => location.href=url}>{buttonTitle}</CardButton>
-        ) : (
-          <Link href={"#"}>
-            <CardButton inverted={true}>{buttonTitle}</CardButton>
-          </Link>
-        )}
+        {urlType === "P" ? portfolioButton() : ""}
+
+        {urlType === "B" ? boardButton() : ""}
       </CardContentContainer>
     </CardContainer>
   );
