@@ -1,20 +1,20 @@
-import { ApolloClient } from 'apollo-client';
-import { split, ApolloLink, concat } from 'apollo-link';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { getMainDefinition } from 'apollo-utilities';
-import withApollo from 'next-with-apollo';
-import { HttpLink } from 'apollo-link-http';
-import fetch from 'isomorphic-unfetch';
-import { WebSocketLink } from 'apollo-link-ws';
-import Cookies from 'js-cookie';
-import { SERVER, WEB_SOCKET_LINK } from './config';
+import { ApolloClient } from "apollo-client";
+import { split, ApolloLink, concat } from "apollo-link";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { getMainDefinition } from "apollo-utilities";
+import withApollo from "next-with-apollo";
+import { HttpLink } from "apollo-link-http";
+import fetch from "isomorphic-unfetch";
+import { WebSocketLink } from "apollo-link-ws";
+import Cookies from "js-cookie";
+import { SERVER, WEB_SOCKET_LINK } from "./config";
 
 interface Definintion {
   kind: string;
   operation?: string;
 }
 
-let authToken:any = null;
+let authToken: any = null;
 
 const httpLink = new HttpLink({
   fetch,
@@ -49,7 +49,7 @@ const webSocketLink: any = process.browser
 export const setToken = async (token: string) => {
   try {
     authToken = token ? `Bearer ${token}` : null;
-    Cookies.set('token', authToken, { expires: 7 });
+    Cookies.set("token", authToken, { expires: 7 });
   } catch (error) {
     console.log(error);
   }
@@ -74,7 +74,7 @@ export const setTokenInRequest = async (token: string) => {
  */
 export const destroyToken = async () => {
   try {
-    Cookies.remove('token');
+    Cookies.remove("token");
     authToken = null;
   } catch (error) {
     console.log(error);
@@ -85,12 +85,17 @@ const link = process.browser
   ? split(
       ({ query }) => {
         const { kind, operation }: Definintion = getMainDefinition(query);
-        return kind === 'OperationDefinition' && operation === 'subscription';
+        return kind === "OperationDefinition" && operation === "subscription";
       },
       webSocketLink,
       httpLink
     )
   : httpLink;
+
+export const client = new ApolloClient({
+  link: concat(authMiddleware, link),
+  cache: new InMemoryCache(),
+});
 
 export default withApollo(
   ({ initialState }) =>

@@ -33,6 +33,7 @@
     "multer-s3": "^2.9.0",
     "next": "9.3.5",
     "next-images": "^1.4.0",
+    "next-redux-wrapper": "^6.0.0",
     "next-with-apollo": "^5.0.1",
     "react": "16.13.1",
     "react-apollo": "^3.1.5",
@@ -43,6 +44,7 @@
     "react-redux": "^7.2.0",
     "react-share": "^4.1.0",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "remark": "^12.0.0",
@@ -50,7 +52,8 @@
     "reselect": "^4.0.0",
     "styled-components": "^5.1.0",
     "styled-reset": "^4.1.4",
-    "subscriptions-transport-ws": "^0.9.16"
+    "subscriptions-transport-ws": "^0.9.16",
+    "typesafe-actions": "^5.1.0"
   },
   "devDependencies": {
     "@types/highlight.js": "^9.12.3",
@@ -60,7 +63,9 @@
     "@types/node": "^13.13.5",
     "@types/react": "^16.9.34",
     "@types/react-loader-spinner": "^3.1.0",
+    "@types/react-redux": "^7.1.9",
     "@types/react-share": "^3.0.3",
+    "@types/redux-logger": "^3.0.7",
     "@types/reselect": "^2.2.0",
     "@types/styled-components": "^5.1.0",
     "babel-plugin-styled-components": "^1.10.7",

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Disqus from "disqus-react";
 
-import { CustomButton } from "../button/Button.styles";
+import CustomButton from "../button/Button.component";
 
 type CardProps = {
   imgSrc?: string;

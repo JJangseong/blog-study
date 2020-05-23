@@ -1,5 +1,7 @@
 import { NextPage } from "next";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { getPostThunk } from "../../../redux/post/thunks";
 
 import {
   CardContainer,
@@ -40,6 +42,8 @@ const Card: NextPage<CardProps> = ({
   url,
   urlType,
 }) => {
+  const dispatch = useDispatch();
+
   const portfolioButton = () => {
     return url ? (
       <CardButton inverted={true} onClick={() => (location.href = url)}>
@@ -56,9 +60,7 @@ const Card: NextPage<CardProps> = ({
         <CardButton inverted={true}>{buttonTitle}</CardButton>
       </Link>
     ) : (
-      <Link href={"#"}>
-        <CardButton inverted={true}>{buttonTitle}</CardButton>
-      </Link>
+      <CardButton inverted={true}>{buttonTitle}</CardButton>
     );
   };
 
