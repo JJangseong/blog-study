@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Container } from "../commons/Common.styles";
+import ShareComponent from "./shareComponent/Share.component";
 
 type PostProps = {
   imgUrl?: string;
@@ -23,6 +24,26 @@ export const ImageContainer = styled.div<PostProps>`
   background-position:center;
 `;
 
-export const DisqusContainer = styled.div`
-  width: 95%;
+export const MainContainer = styled.div`
+  width: 79rem;
+
+  @media (max-width: 79rem) {
+    width: 98%;
+  }
 `;
+
+export const DisqusContainer = styled.div`
+  width: 100%;
+  margin-top: 1rem;
+`;
+
+export const BottomShareContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+
+`;
+
+export const BottomShareComponent = styled(ShareComponent)`
+  margin-left: auto;
+`

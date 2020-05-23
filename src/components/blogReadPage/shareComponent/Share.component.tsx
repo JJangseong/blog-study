@@ -1,11 +1,6 @@
 import { NextPage } from "next";
 
-import {
-  EmailIcon,
-  FacebookIcon,
-  LineIcon,
-  TwitterIcon,
-} from "react-share";
+import { EmailIcon, FacebookIcon, LineIcon, TwitterIcon } from "react-share";
 
 import {
   ShareContainer,
@@ -16,13 +11,13 @@ import {
 } from "./Share.styles";
 
 type SharePropsType = {
-  isShow: boolean
-}
+  isShow: boolean;
+  direction: string;
+};
 
-const ShareComponent: NextPage<SharePropsType> = ({isShow}) => {
-
+const ShareComponent: NextPage<SharePropsType> = ({ isShow, direction }) => {
   return (
-    <ShareContainer isShow={isShow}>
+    <ShareContainer isShow={isShow} direction={direction}>
       <FacebookeButton url="www.naver.com">
         <FacebookIcon size={32} round={true} />
       </FacebookeButton>

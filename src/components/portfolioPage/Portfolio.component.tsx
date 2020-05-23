@@ -67,6 +67,7 @@ const PortfolioPageComponent: NextPage = () => {
           ? portfolioList.map(({ id, title, content, url, createdAt }: any) => {
               return (
                 <Card
+                  id={id}
                   title={title}
                   key={id}
                   content={content}

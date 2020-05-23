@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const TagContainer = styled.div`
   width: 76rem;
   display: flex;
-  margin-bottom: 3rem;
+  margin-top: 3rem;
 
   @media (max-width: 76rem) {
     width: 100%;

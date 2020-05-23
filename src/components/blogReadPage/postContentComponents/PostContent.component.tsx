@@ -15,32 +15,17 @@ import ShareComponent from "../shareComponent/Share.component";
 
 type PostContentPropsType = {
   post: any;
+  refContent: any;
+  isShow: boolean;
 };
 
-const PostContentComponent: NextPage<PostContentPropsType> = ({ post }) => {
+const PostContentComponent: NextPage<PostContentPropsType> = ({ post, refContent, isShow }) => {
   const mdParser: MarkdownIt = getMdParser();
-  const refContent2 = useRef<HTMLDivElement>(null);
-  const [isShow, setShow] = useState(false);
-
-  useEffect(() => {
-    window.addEventListener("scroll", HandleScrllEvent);
-    return () => {
-      window.removeEventListener("scroll", HandleScrllEvent);
-    };
-  }, []);
-
-  const HandleScrllEvent = () => {
-    const { top, height }: any = refContent2.current?.getBoundingClientRect();
-
-    if (-(height - 1000) > top) setShow(false);
-    else if (top < 0) setShow(true);
-    else if (top > 0) setShow(false);
-  };
 
   return (
     <ContentContainer>
-      <ShareComponent isShow={isShow} />
-      <Content ref={refContent2}>
+      <ShareComponent isShow={isShow} direction="column"/>
+      <Content ref={refContent}>
         <MdEditor
           value=""
           style={{ height: "100%", border: "none" }}

@@ -1,4 +1,4 @@
-import { NextPage, GetStaticPaths, GetStaticProps } from "next";
+import { NextPage } from "next";
 import { useRouter, NextRouter } from "next/dist/client/router";
 import Disqus from "disqus-react";
 import gql from "graphql-tag";
@@ -8,13 +8,17 @@ import {
   PostContainer,
   ImageContainer,
   DisqusContainer,
+  MainContainer,
+  BottomShareComponent,
+  BottomShareContainer,
 } from "./BlogRead.styles";
 
 import PostHeaderComponent from "./postHeaderComponen/PostHeader.component";
 import PostContentComponent from "./postContentComponents/PostContent.component";
 import PostTagsComponent from "./postTagsComponent/PostTags.component";
-
-import HomePhoto from "../../assets/images/home_main.jpg";
+import { useEffect, useRef, useState } from "react";
+import { getDisqusConfig, getDisqusShortname } from "../../utils/disqus.utils";
+import CustomLoaderComponent from "../commons/loader/CustomLoader.component";
 
 const GET_BLOG = gql`
   query getBlog($id: String) {
@@ -35,34 +39,54 @@ const GET_BLOG = gql`
 
 const BlogReadComponent: NextPage = () => {
   const router: NextRouter = useRouter();
+  console.log(router);
+  const refContent = useRef<HTMLDivElement>(null);
   const id: string = router.query.id as string;
+  const [isShow, setShow] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", HandleScrllEvent);
+    return () => {
+      window.removeEventListener("scroll", HandleScrllEvent);
+    };
+  }, []);
+
+  const HandleScrllEvent = () => {
+    const { top, height }: any = refContent.current?.getBoundingClientRect();
+
+    if (-(height - 1000) > top) setShow(false);
+    else if (top < 0) setShow(true);
+    else if (top > 0) setShow(false);
+  };
 
   const { loading, error, data } = useQuery(GET_BLOG, {
     variables: { id },
   });
-  if (loading) return <div>loading.....</div>;
+  if (loading) return <CustomLoaderComponent type="Bars"/>;
   const post = data.selectPost;
   const { title, tags, createdAt, imgUrl } = post;
-
-  const disqusShortname = "sungjin-log";
-  const disqusConfig = {
-    url: "http://localhost:3000/" + id,
-    identifier: id,
-    title: post.title,
-  };
 
   return (
     <PostContainer>
       <PostHeaderComponent title={title} createdAt={createdAt} />
       {imgUrl ? <ImageContainer imgUrl={imgUrl} /> : ""}
-      <PostContentComponent post={post} />
-      <PostTagsComponent tags={tags} />
-      <DisqusContainer>
-        <Disqus.DiscussionEmbed
-          shortname={disqusShortname}
-          config={disqusConfig}
+      <MainContainer>
+        <PostContentComponent
+          post={post}
+          isShow={isShow}
+          refContent={refContent}
         />
-      </DisqusContainer>
+        <PostTagsComponent tags={tags} />
+        <BottomShareContainer>
+          <BottomShareComponent isShow={!isShow} direction="row" />
+        </BottomShareContainer>
+        <DisqusContainer>
+          <Disqus.DiscussionEmbed
+            shortname={getDisqusShortname}
+            config={getDisqusConfig(id, post.title)}
+          />
+        </DisqusContainer>
+      </MainContainer>
     </PostContainer>
   );
 };

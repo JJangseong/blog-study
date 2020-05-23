@@ -1,8 +1,11 @@
 import styled from "styled-components";
+import Disqus from "disqus-react";
+
 import { CustomButton } from "../button/Button.styles";
 
 type CardProps = {
   imgSrc?: string;
+  commentIcon?: any;
 };
 
 export const CardHeading = styled.div<CardProps>`
@@ -14,8 +17,7 @@ export const CardHeading = styled.div<CardProps>`
   height: 31rem;
   transition: all 0.3s;
 
-  /* ${(props) => (props.imgSrc ? "" : "height: 8rem; opacity: 0.8;")} */
-  
+  ${(props) => (props.imgSrc ? "" : "height: 8rem; opacity: 0.8;")}
 `;
 
 export const CardContentContainer = styled.div`
@@ -36,14 +38,19 @@ export const CardDate = styled.div`
   color: ${(props) => props.theme.color.greyLight4};
   margin-top: 1.2rem;
   margin-bottom: 1.2rem;
+  margin-left: auto;
 `;
 
 export const CardContent = styled.div`
   font-size: 1.3rem;
   line-height: 1.6rem;
-  height: 15rem;
+  height: 9.6rem;
   margin: 1.2rem;
+  margin-bottom: 5rem;
   overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
 `;
 
 export const CardContainer = styled.div`
@@ -64,6 +71,20 @@ export const CardContainer = styled.div`
   }
 `;
 
+export const InfoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const CardButton = styled(CustomButton)`
   margin: 0 auto;
 `;
+
+export const CommentCountContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  color: ${(props) => props.theme.color.greyLight4};
+`;
+
+export const CommentCount = styled(Disqus.CommentCount)``;

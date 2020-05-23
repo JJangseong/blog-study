@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import Link from "next/link";
 
 import {
   CardContainer,
@@ -8,10 +9,18 @@ import {
   CardDate,
   CardTitle,
   CardButton,
+  CommentCountContainer,
+  CommentCount,
+  InfoContainer,
 } from "./Card.style";
-import Link from "next/link";
+
+import {
+  getDisqusConfig,
+  getDisqusShortname,
+} from "../../../utils/disqus.utils";
 
 type CardProps = {
+  id: string;
   title: string;
   content: string;
   buttonTitle: string;
@@ -22,6 +31,7 @@ type CardProps = {
 };
 
 const Card: NextPage<CardProps> = ({
+  id,
   title,
   date,
   imgSrc,
@@ -36,15 +46,13 @@ const Card: NextPage<CardProps> = ({
         {buttonTitle}
       </CardButton>
     ) : (
-      <Link href={"#"}>
-        <CardButton inverted={true}>{buttonTitle}</CardButton>
-      </Link>
+      <CardButton inverted={true}>{buttonTitle}</CardButton>
     );
   };
 
   const boardButton = () => {
     return url ? (
-      <Link href={url}>
+      <Link href={url} as={url}>
         <CardButton inverted={true}>{buttonTitle}</CardButton>
       </Link>
     ) : (
@@ -59,7 +67,20 @@ const Card: NextPage<CardProps> = ({
       <CardHeading imgSrc={imgSrc} />
       <CardContentContainer>
         <CardTitle>{title}</CardTitle>
-        <CardDate>{date}</CardDate>
+        <InfoContainer>
+          {urlType === "B" ? (
+            <CommentCountContainer>
+              <CommentCount
+                shortname={getDisqusShortname}
+                config={getDisqusConfig(id, title)}
+              ></CommentCount>
+            </CommentCountContainer>
+          ) : (
+            ""
+          )}
+
+          <CardDate>{date}</CardDate>
+        </InfoContainer>
         <CardContent>{content}</CardContent>
         {urlType === "P" ? portfolioButton() : ""}
 

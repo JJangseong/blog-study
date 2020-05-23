@@ -30,9 +30,10 @@ const GET_TAGS = gql`
 type SideNavPropsType = {
   push: any;
   tag: string;
+  handleSearchInput: any;
 };
 
-const SideNavComponent: NextPage<SideNavPropsType> = ({ push, tag }) => {
+const SideNavComponent: NextPage<SideNavPropsType> = ({ push, tag, handleSearchInput }) => {
   const [isClicked, setClicked] = useState(false);
   const { loading, error, data } = useQuery(GET_TAGS);
 
@@ -53,8 +54,9 @@ const SideNavComponent: NextPage<SideNavPropsType> = ({ push, tag }) => {
           <NavSearchIcon src={SearchIcon} onClick={handleClick} />
         </NavSearchIconContainer>
         <SearchInput
-          placeholder="검색어를 입력 후 엔터로 검색해주세요."
+          placeholder="검색어를 입력해주세요."
           isClicked={isClicked}
+          onChange={handleSearchInput}
         />
         <SearchCancel isClicked={isClicked} onClick={handleClick}>
           X

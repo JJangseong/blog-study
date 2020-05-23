@@ -8,25 +8,24 @@ import {
 
 type Props = {
   isShow: boolean;
+  direction?: string;
 };
 
 export const ShareContainer = styled.div<Props>`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${(props) => props.direction || "column"};
   justify-content: space-between;
   align-content: center;
   transition: opacity 0.2s;
   opacity: ${(props) => (props.isShow ? "1" : "0")};
-  position: fixed;
+  position: ${(props) => (props.direction === "column" ? "fixed" : "")};
   top: 8rem;
-  width: 7.2rem;
-  height: 15rem;
-  margin: 2.5rem;
-
+  left: calc((100vw - 99.5rem) / 2 + 4rem);
 `;
 
 const ButtonCss = css`
   transition: all 0.3s;
+  margin: 0.2rem;
 
   &:active,
   &:focus {
