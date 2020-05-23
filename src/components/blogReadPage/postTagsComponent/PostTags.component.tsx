@@ -4,7 +4,7 @@ import { TagContainer, TagItem } from "./PostTags.styles";
 import { Tag } from "../../../types/tag";
 
 type PostTagsPropsType = {
-  tags: Tag[];
+  tags?: Tag[];
 };
 
 const PostTagsComponent: NextPage<PostTagsPropsType> = ({ tags }) => {

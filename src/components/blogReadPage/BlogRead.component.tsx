@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import { useRouter, NextRouter } from "next/dist/client/router";
+import Router from "next/router";
 import Disqus from "disqus-react";
 import gql from "graphql-tag";
 import { useQuery } from "react-apollo";
@@ -22,6 +23,8 @@ import { getDisqusConfig, getDisqusShortname } from "../../utils/disqus.utils";
 import CustomLoaderComponent from "../commons/loader/CustomLoader.component";
 import { RootState } from "../../redux/index";
 import { getPostThunk } from "../../redux/post/thunks";
+import { Post } from "../../types/post";
+import { Tag } from "../../types/tag";
 
 const GET_BLOG = gql`
   query getBlog($id: String) {
@@ -43,10 +46,14 @@ const GET_BLOG = gql`
 const BlogReadComponent: NextPage = () => {
   const router: NextRouter = useRouter();
   const refContent = useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch();
   const id: string = router.query.id as string;
+  const result = useSelector((state: RootState) => state.post.post[id]);
   const [isShow, setShow] = useState(false);
 
   useEffect(() => {
+    dispatch(getPostThunk(Router.query.id as string));
+
     window.addEventListener("scroll", HandleScrllEvent);
     return () => {
       window.removeEventListener("scroll", HandleScrllEvent);
@@ -61,12 +68,10 @@ const BlogReadComponent: NextPage = () => {
     else if (top > 0) setShow(false);
   };
 
-  const { loading, error, data } = useQuery(GET_BLOG, {
-    variables: { id },
-  });
-  if (loading) return <CustomLoaderComponent type="Bars" />;
-  const post = data.selectPost;
-  const { title, tags, createdAt, imgUrl } = post;
+  if (!result || result.loading) return <CustomLoaderComponent type="Bars" />;
+  
+  const post = result.data;
+  const { title, tags, createdAt, imgUrl } = post as Post;
 
   return (
     <PostContainer>
@@ -85,7 +90,7 @@ const BlogReadComponent: NextPage = () => {
         <DisqusContainer>
           <Disqus.DiscussionEmbed
             shortname={getDisqusShortname}
-            config={getDisqusConfig(id, post.title)}
+            config={getDisqusConfig(id, title)}
           />
         </DisqusContainer>
       </MainContainer>
