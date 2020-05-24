@@ -1,26 +1,38 @@
-version: '2'
+version: '3'
 
 services:
-  nginx:
-    container_name: sungjin-log-nginx
-    build: ./nginx
-    links:
-      - frontEnd:frontEnd
-      - backEnd:backEnd
-    ports:
-      - 3000:80
-    depends_on:
-      - frontEnd
-      - backEnd
+  db:
+    image: postgres
+    volumes:
+      - ./docker/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=sungjinlogtest
+      - POSTGRES_USER=sungjin
+      - POSTGRES_PASSWORD=wkdtjdwls1!
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8
 
-  frontEnd:
-    container_name: sungjin-log-front
-    image: sungjin-log-front:test
+  nextjs:
     ports:
-      - 3000
+      - 80:80
+    build:
+      context: ./front
+      dockerfile: dockerfile
+    volumes:
+      - ./front:/usr/src/front
+      - /usr/src/front/node_modules
+      - /usr/src/front/.next
+    env_file:
+      - ./front/.env
 
-  backEnd:
-    container_name: sungjin-log-back
-    image: sungjin-log-back:test
+  backend:
     ports:
-      - 3000
+      - 4000:4000
+    build:
+      context: ./back
+      dockerfile: dockerfile
+    volumes:
+      - ./front:/usr/src/back
+      - /usr/src/back/node_modules
+    env_file:
+      - ./back/.env
+    
