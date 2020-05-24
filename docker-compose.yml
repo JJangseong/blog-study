@@ -31,7 +31,7 @@ services:
       context: ./back
       dockerfile: dockerfile
     volumes:
-      - ./front:/usr/src/back
+      - ./back:/usr/src/back
       - /usr/src/back/node_modules
     env_file:
       - ./back/.env
