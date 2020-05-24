@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  nginx:
+    container_name: node-nginx-lb
+    build: ./nginx
+    links:
+      - frontEnd:frontEnd
+      - backEnd:backEnd
+    ports:
+      - 3000:80
+    depends_on:
+      - frontEnd
+      - backEnd
+
+  frontEnd:
+    container_name: node-nginx-1
+    image: node-nginx:test
+    ports:
+      - 3000
+
+  backEnd:
+    container_name: node-nginx-1
+    image: node-nginx:test
+    ports:
+      - 3000

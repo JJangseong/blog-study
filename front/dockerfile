@@ -1,8 +1,8 @@
-FROM node:latest
+FROM node:14.2.0
 COPY package.json /src/package.json
 RUN  cd /src; npm install
 COPY . /src
 EXPOSE 3000
 WORKDIR /src
 
-CMD npm run start
+CMD npm run buildAndStart

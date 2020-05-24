@@ -6,7 +6,7 @@
     "dev": "NODE_ENV=development next dev",
     "build": "next build",
     "start": "NODE_ENV=production next start",
-    "buildAndStart": "next build && next start",
+    "buildAndStart": "NODE_ENV=production next build && next start",
     "export": "next export",
     "deploy": "NODE_ENV=production npm run build && npm run export"
   },
