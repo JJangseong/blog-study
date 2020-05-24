@@ -2,7 +2,7 @@ version: '2'
 
 services:
   nginx:
-    container_name: node-nginx-lb
+    container_name: sungjin-log-nginx
     build: ./nginx
     links:
       - frontEnd:frontEnd
@@ -14,13 +14,13 @@ services:
       - backEnd
 
   frontEnd:
-    container_name: node-nginx-1
-    image: node-nginx:test
+    container_name: sungjin-log-front
+    image: sungjin-log-front:test
     ports:
       - 3000
 
   backEnd:
-    container_name: node-nginx-1
-    image: node-nginx:test
+    container_name: sungjin-log-back
+    image: sungjin-log-back:test
     ports:
       - 3000

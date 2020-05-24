@@ -8,6 +8,7 @@ type PostTagsPropsType = {
 };
 
 const PostTagsComponent: NextPage<PostTagsPropsType> = ({ tags }) => {
+  if (!tags) return null;
   return (
     <TagContainer>
       {tags.map(({ id, content }) => (

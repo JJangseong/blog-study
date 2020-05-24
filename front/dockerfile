@@ -1,4 +1,4 @@
-FROM node:14.2.0
+FROM node:latest
 COPY package.json /src/package.json
 RUN  cd /src; npm install
 COPY . /src
