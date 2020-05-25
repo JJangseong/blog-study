@@ -18,8 +18,9 @@ export const ShareContainer = styled.div<Props>`
   align-content: center;
   transition: opacity 0.2s;
   opacity: ${(props) => (props.isShow ? "1" : "0")};
-  position: ${(props) => (props.direction === "column" ? "fixed" : "")};
+  position: ${(props) => (props.direction === "column" ? "sticky" : "")};
   top: 8rem;
+  height: ${props => props.direction === "column" ? "15rem" : "3rem"};
   left: calc((100vw - 99.5rem) / 2 + 4rem);
 `;
 

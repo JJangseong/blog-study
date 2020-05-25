@@ -6,5 +6,12 @@ export const ContentContainer = styled.div`
   margin-left: 28.6rem;
   display: grid;
   grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fill, minmax(29rem, 0.3fr));
+  grid-template-columns: repeat(auto-fill, minmax(29rem, 1fr));
 `;
+
+
+// &::after {
+//   content: "";
+//   display: table;
+//   clear: both;
+// }

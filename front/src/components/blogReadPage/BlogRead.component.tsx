@@ -49,7 +49,7 @@ const BlogReadComponent: NextPage = () => {
   const dispatch = useDispatch();
   const id: string = router.query.id as string;
   const result = useSelector((state: RootState) => state.post.post[id]);
-  const [isShow, setShow] = useState(false);
+  const [isShow, setShow] = useState(true);
 
   useEffect(() => {
     dispatch(getPostThunk(Router.query.id as string));
@@ -65,7 +65,7 @@ const BlogReadComponent: NextPage = () => {
 
     if (-(height - 1000) > top) setShow(false);
     else if (top < 0) setShow(true);
-    else if (top > 0) setShow(false);
+    // else if (top > 0) setShow(false);
   };
 
   if (!result || result.loading) return <CustomLoaderComponent type="Bars" />;

@@ -75,13 +75,14 @@ export const CardContent = styled.p<CardProps>`
 
 export const CardContainer = styled.div<CardProps>`
   height: ${(props) => (props.isLong ? "45rem" : "40rem")};
-  max-width: 30.5rem;
+  /* max-width: 30.5rem; */
 
   background-color: #fff;
   box-shadow: ${(props) => props.theme.shadow.card};
   overflow: hidden;
   transition: transform 0.3s;
   border-radius: 5px;
+
 `;
 
 export const InfoContainer = styled.div`
@@ -105,7 +106,7 @@ export const CommentCountContainer = styled.div`
 export const CommentCount = styled(Disqus.CommentCount)``;
 
 export const UndefindeImgContainer = styled.div`
-  max-width: calc(30.5rem - 4rem);
+  /* max-width: calc(30.5rem - 4rem); */
   height: 25rem;
   background-color: ${(props) => props.theme.color.greyLight2};
   box-shadow: ${(props) => props.theme.shadow.card};
