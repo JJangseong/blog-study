@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { getPostThunk } from "../../../redux/post/thunks";
+import { IconComponent, UndefindeTitle, UndefindeContent } from "./Card.style";
 
 import {
   CardContainer,
@@ -14,6 +15,8 @@ import {
   CommentCountContainer,
   CommentCount,
   InfoContainer,
+  CardHadingContainer,
+  UndefindeImgContainer,
 } from "./Card.style";
 
 import {
@@ -44,31 +47,19 @@ const Card: NextPage<CardProps> = ({
 }) => {
   const dispatch = useDispatch();
 
-  const portfolioButton = () => {
-    return url ? (
-      <CardButton inverted={true} onClick={() => (location.href = url)}>
-        {buttonTitle}
-      </CardButton>
-    ) : (
-      <CardButton inverted={true}>{buttonTitle}</CardButton>
-    );
-  };
-
-  const boardButton = () => {
-    return url ? (
-      <Link href={url} as={url}>
-        <CardButton inverted={true}>{buttonTitle}</CardButton>
-      </Link>
-    ) : (
-      <CardButton inverted={true}>{buttonTitle}</CardButton>
-    );
-  };
-
-  return (
-    <CardContainer>
-      <CardHeading imgSrc={imgSrc} />
+  return imgSrc ? (
+    <CardContainer isLong={Number(id) % 2 === 0 ? true : false}>
+      <CardHadingContainer>
+        <Link href={url}>
+          <CardHeading imgSrc={imgSrc} />
+        </Link>
+      </CardHadingContainer>
       <CardContentContainer>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle>
+          <Link href={url}>
+            <a>{title}</a>
+          </Link>
+        </CardTitle>
         <InfoContainer>
           {urlType === "B" ? (
             <CommentCountContainer>
@@ -84,11 +75,32 @@ const Card: NextPage<CardProps> = ({
           <CardDate>{date}</CardDate>
         </InfoContainer>
         <CardContent>{content}</CardContent>
-        {urlType === "P" ? portfolioButton() : ""}
-
-        {urlType === "B" ? boardButton() : ""}
       </CardContentContainer>
     </CardContainer>
+  ) : (
+    <UndefindeImgContainer>
+      <IconComponent />
+      <UndefindeTitle>
+        <Link href={url}>
+          <a>{title}</a>
+        </Link>
+      </UndefindeTitle>
+      <InfoContainer>
+        {urlType === "B" ? (
+          <CommentCountContainer>
+            <CommentCount
+              shortname={getDisqusShortname}
+              config={getDisqusConfig(id, title)}
+            ></CommentCount>
+          </CommentCountContainer>
+        ) : (
+          ""
+        )}
+
+        <CardDate>{date}</CardDate>
+      </InfoContainer>
+      <UndefindeContent>{content}</UndefindeContent>
+    </UndefindeImgContainer>
   );
 };
 

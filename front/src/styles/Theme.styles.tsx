@@ -10,10 +10,12 @@ const theme: DefaultTheme = {
     greyLight2: "#f4f2f2",
     greyLight3: "#f0eeee",
     greyLight4: "#ccc",
+    
 
     greyDark1: "#333",
     greyDark2: "#777",
-    greyDark3: "#999",
+    greyDark3: "#666",
+    greyDark4: "#999",
   },
   shadow: {
     dark: "0 2rem 6rem rgba(0, 0, 0, 0.3)",

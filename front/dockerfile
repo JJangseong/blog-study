@@ -14,8 +14,8 @@ RUN npm install
 COPY . /usr/src/front
 
 # Building app
-RUN npm run build
+# RUN npm run build
 EXPOSE 80
 
 # Running the app
-CMD "npm" "run" "start"
+CMD "npm" "run" "dev"
