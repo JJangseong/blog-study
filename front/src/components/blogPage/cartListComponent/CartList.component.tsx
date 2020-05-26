@@ -20,6 +20,9 @@ const CardListComponent: NextPage<CardListPropsType> = ({
 }) => {
   if (loading) return <CustomLoaderComponent />;
   const postList = posts.selectPostList;
+
+
+
   return (
     <ContentContainer>
       {postList

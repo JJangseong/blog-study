@@ -12,7 +12,7 @@ export const PostContainer = styled(Container)`
   flex-direction: column;
   align-items: center;
   background-color: #fff;
-  box-shadow: ${({theme}) => theme.shadow.dark};
+  /* box-shadow: ${({theme}) => theme.shadow.dark}; */
 
 `;
 

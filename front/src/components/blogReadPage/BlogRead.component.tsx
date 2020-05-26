@@ -3,7 +3,6 @@ import { useRouter, NextRouter } from "next/dist/client/router";
 import Router from "next/router";
 import Disqus from "disqus-react";
 import gql from "graphql-tag";
-import { useQuery } from "react-apollo";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 

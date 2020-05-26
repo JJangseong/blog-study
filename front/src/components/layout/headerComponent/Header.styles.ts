@@ -7,7 +7,7 @@ type HeaderProps = {
 
 export const HeaderContainer = styled.div<HeaderProps>`
   border-bottom: ${(props) => (props.isHome ? "none" : props.theme.line)};
-  box-shadow: ${(props) => (props.isHome ? "none" : props.theme.shadow.light)};
+  /* box-shadow: ${(props) => (props.isHome ? "none" : props.theme.shadow.light)}; */
 `;
 
 export const HeaderItemContainer = styled(Container)<HeaderProps>`

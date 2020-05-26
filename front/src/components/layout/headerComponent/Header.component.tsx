@@ -28,9 +28,6 @@ const Header: FunctionComponent = () => {
           </HeaderLogo>
         </Link>
         <NavList>
-          <Link href="/story">
-            <NavItem isHome={isHome}>My Story</NavItem>
-          </Link>
           <Link href="/portfolio">
             <NavItem isHome={isHome}>Portfolio</NavItem>
           </Link>

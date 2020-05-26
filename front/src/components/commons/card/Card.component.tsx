@@ -48,7 +48,7 @@ const Card: NextPage<CardProps> = ({
   const dispatch = useDispatch();
 
   return imgSrc ? (
-    <CardContainer isLong={Number(id) % 2 === 0 ? true : false}>
+    <CardContainer isLong={false}>
       <CardHadingContainer>
         <Link href={url}>
           <CardHeading imgSrc={imgSrc} />
