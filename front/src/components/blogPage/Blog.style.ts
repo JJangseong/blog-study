@@ -6,7 +6,6 @@ export const BlogContainer = styled(Container)`
   display: flex;
   flex-direction: row;
   height: auto;
-  grid-gap: 3rem;
 `;
 
 

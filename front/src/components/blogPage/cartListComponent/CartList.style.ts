@@ -4,9 +4,8 @@ export const ContentContainer = styled.div`
   flex: 1;
   padding: 3rem;
   margin-left: 28.6rem;
-  display: grid;
-  grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fill, minmax(29rem, 1fr));
+  column-width: 30.5rem;
+  column-gap: 2.4rem;
 `;
 
 
