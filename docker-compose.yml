@@ -1,15 +1,15 @@
 version: '3'
 
 services:
-  db:
-    image: postgres
-    volumes:
-      - ./docker/data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=sungjinlogtest
-      - POSTGRES_USER=sungjin
-      - POSTGRES_PASSWORD=wkdtjdwls1!
-      - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+  # db:
+  #   image: postgres
+  #   volumes:
+  #     - ./docker/data:/var/lib/postgresql/data
+  #   environment:
+  #     - POSTGRES_DB=sungjinlogtest
+  #     - POSTGRES_USER=sungjin
+  #     - POSTGRES_PASSWORD=wkdtjdwls1!
+  #     - POSTGRES_INITDB_ARGS=--encoding=UTF-8
 
   nextjs:
     ports:
