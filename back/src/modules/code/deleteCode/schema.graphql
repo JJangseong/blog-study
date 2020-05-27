@@ -1,3 +1,0 @@
-type Mutation {
-  deleteCode(id: Int!):Boolean
-}

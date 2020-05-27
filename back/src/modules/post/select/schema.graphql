@@ -1,4 +1,0 @@
-type Query {
-  selectPostList(tag: String, type: String):[Post]
-  selectPost(id:String):Post
-}
